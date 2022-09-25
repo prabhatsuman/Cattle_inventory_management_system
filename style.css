@@ -20,19 +20,21 @@
     }
     
     .carousel-item {
-        padding: 0.5% 2% 0% 2%;
+        /* padding: 0.5% 2% 0% 2%; */
         position: relative;
+        border: 0.1rem solid;
     }
     
     #abc {
         /* text-align: center; */
         color: white;
         position: relative;
+        opacity: 95%;
     }
     
     .abcd {
         width: 100%;
-        height: 35vmax;
+        height: 45vmax;
         z-index: 0;
         /* border-radius: 100%; */
         /* margin: 20%; */
