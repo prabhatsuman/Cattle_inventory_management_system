@@ -21,6 +21,7 @@
     
     .carousel-item {
         padding: 0.5% 2% 0% 2%;
+        position: relative;
     }
     
     #abc {
@@ -32,23 +33,27 @@
     .abcd {
         width: 100%;
         height: 35vmax;
+        z-index: 0;
         /* border-radius: 100%; */
         /* margin: 20%; */
     }
-
-    #pricing{
+    
+    #pricing {
         padding: 100px;
         text-align: center;
     }
-
-    .pricing-column{
+    
+    .pricing-column {
         padding: 3% 2%;
     }
-
-    .bottom-container{
-        color:green ;
+    
+    .bottom-container {
+        color: green;
         padding: 50px 0 20px;
         background-color: rgb(185, 185, 185);
         text-align: center;
-     
-     }
+    }
+    
+    .corousel-inner {
+        position: relative;
+    }
