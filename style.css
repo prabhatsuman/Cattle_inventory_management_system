@@ -12,10 +12,11 @@
     #carouselExampleControls {
         /* width: 100%;
     height: 50rem; */
-        display: block;
-        align-items: center;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
         position: absolute;
-        margin-bottom: 15%;
+        padding: 15%;
     }
     
     .carousel-item {
@@ -30,7 +31,7 @@
     
     .abcd {
         width: 100%;
-        height: 40rem;
+        height: 35vmax;
         /* border-radius: 100%; */
         /* margin: 20%; */
     }
