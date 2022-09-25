@@ -3,19 +3,8 @@
     background-color: rgb(89, 212, 109);
 }
 
-.navbar-brand {
-    font-family: "ubuntu";
-    font-size: 2rem;
-    font-weight: bold;
-    color: #fff;
-}
-
 .nav-item a {
     padding: 0 18px;
     color: white;
-}
-
-.nav-link {
-    font-size: 1.5rem;
-    font-family: "Montserrat-thin";
+    font-size: larger;
 }
