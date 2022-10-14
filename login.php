@@ -1,6 +1,6 @@
 <?php
 include 'database_connection.php';
-include 'function.php';
+// include 'function.php';
 $message = '';
 
 if(isset($_POST["login_button"]))
@@ -56,7 +56,7 @@ if(isset($_POST["login_button"]))
 				{
 					$_SESSION['admin_id'] = $row['admin_id'];
 
-					header('location:admin/index.php');
+					header('location:/index.php');
 				}
 				else
 				{
