@@ -1,3 +1,12 @@
+<?php
+//index.php
+include '../database_connection.php';
+include '../function.php';
+if(!is_admin_login())
+{
+	header('location:../admin_login.php');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
 
     <style>
         .carousel-caption {
@@ -40,7 +49,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav  ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="login.html">Login</a>
+                        <a class="nav-link" aria-current="page" href="login.php">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
