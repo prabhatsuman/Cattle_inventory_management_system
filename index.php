@@ -45,7 +45,7 @@ include '../function.php';
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav  ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="login.html">Login</a>
+                        <a class="nav-link" aria-current="page" href="login.php">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
