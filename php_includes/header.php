@@ -93,7 +93,7 @@ if(!is_admin_login())
                             <a class="nav-link" href="book.php"style="color:white;">Book</a>
                             <a class="nav-link" href="user.php"style="color:white;">User</a>
                             <a class="nav-link" href="issue_book.php"style="color:white;">Issue Book</a>
-                            <a class="nav-link" href="logout.php"style="color:white;">Logout</a>
+                            <a class="nav-link" href="../logout.php"style="color:white;">Logout</a>
 
                         </div>
                     </div>
