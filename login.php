@@ -1,6 +1,6 @@
 <?php
 include 'database_connection.php';
-include 'function.php';
+include 'php_includes/functions.php';
 $message = '';
 
 if (isset($_POST["login_button"])) {
