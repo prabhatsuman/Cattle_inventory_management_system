@@ -43,7 +43,7 @@ if (isset($_POST["login_button"])) {
 					session_start();
 					$_SESSION['admin_id'] = $row['admin_id'];
 
-					header('location:admin/index.php');
+					header('location:php_includes/header.php');
 				}
 				else
 				{

@@ -1,11 +1,8 @@
 <?php
 //index.php
-include '../database_connection.php';
-include '../function.php';
-if(!is_admin_login())
-{
-	header('location:../admin_login.php');
-}
+include 'database_connection.php';
+include 'php_includes/functions.php';
+
 ?>
 
 <!DOCTYPE html>
