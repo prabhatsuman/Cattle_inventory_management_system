@@ -47,15 +47,18 @@ if (isset($_POST["add_cattle"])) {
     } else {
         $formdata['milk_status'] = trim($_POST["milk_status"]);
     }
-
-    $query1 = "SELECT * FROM cattle WHERE cattle_id = '" . $formdata['cattle_id'] . "'";
-    $check = $connect->prepare($query1);
-    $check->execute();
-
-
-    if ($check->rowCount() > 0) {
-        $error .= '<li>Cattle ID exist</li>';
+    if (!empty($_POST['cattle_id'])) {
+        $query1 = "SELECT * FROM cattle WHERE cattle_id = '" . $formdata['cattle_id'] . "'";
+        $check = $connect->prepare($query1);
+        $check->execute();
+        if ($check->rowCount() > 0) {
+            $error .= '<li>Cattle ID exist</li>';
+        }
     }
+
+
+
+
 
     if ($error == '') {
         $data = array(
@@ -77,12 +80,11 @@ if (isset($_POST["add_cattle"])) {
         header('location:cattle_info.php');
     }
 }
-if(isset($_POST["edit"]))
-{
+if (isset($_POST["edit"])) {
     $formdata = array();
     $formdata[':cattle_id'] = trim($_POST['cattle_id']);
     $formdata[':vaccination'] = trim($_POST['Vaccination']);
-    $formdata[':milk_status'] = trim($_POST['milk_status']=='YES'?1:0);
+    $formdata[':milk_status'] = trim($_POST['milk_status'] == 'YES' ? 1 : 0);
     $query = "UPDATE cattle SET vaccination = :vaccination, milk_status = :milk_status WHERE cattle_id = :cattle_id";
     $statement = $connect->prepare($query);
     $statement->execute($formdata);
@@ -236,15 +238,15 @@ if (isset($_GET["action"])) {
                                     <!-- select gender -->
                                     <select name="milk_status" id="milk_status" class="form-control">
                                         <!-- <option value="none" selected disabled hidden>Select Milk Status</option> -->
-                                        <option value="YES"  <?php if ($row['milk_status'] == 'NO')  echo "selected" ?>>YES</option>
-                                        <option value="NO" >NO</option>
+                                        <option value="YES">YES</option>
+                                        <option value="NO" <?php if ($row['milk_status'] == 0)  echo ' selected="selected"'; ?>>NO</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-4 mb-3 text-center">
-                        <input type="submit" name="edit" class="btn btn-danger" value="Edit" />
-                    </div>
+                            <input type="submit" name="edit" class="btn btn-danger" value="Edit" />
+                        </div>
                     <?php
                 }
                     ?>
