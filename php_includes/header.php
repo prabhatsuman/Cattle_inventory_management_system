@@ -2,6 +2,12 @@
 
 //header.php
 include 'php_includes/functions.php';
+include '../database_connection.php';
+
+if(!is_admin_login())
+{
+    header('location:../login.php');
+}
 
 ?>
 
@@ -70,7 +76,7 @@ include 'php_includes/functions.php';
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="profile.php" style="color:black">Profile</a></li>
                        
-                        <li><a class="dropdown-item" href="logout.php" style="color:black">Logout</a></li>
+                        <li><a class="dropdown-item" href="../logout.php" style="color:black">Logout</a></li>
                     </ul>
                 </li>
             </ul>
