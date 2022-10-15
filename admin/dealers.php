@@ -36,16 +36,19 @@ if (isset($_POST["add_dealer"])) {
     } else {
         $formdata['p_number'] = trim($_POST["p_number"]);
     }
+    if (!empty($_POST['dealer_id'])) {
+        $query1 = "SELECT * FROM dealers WHERE dealer_id = '" . $formdata['dealer_id'] . "'";
+        $check = $connect->prepare($query1);
+        $check->execute();
 
 
-    $query1 = "SELECT * FROM dealers WHERE dealer_id = '" . $formdata['dealer_id'] . "'";
-    $check = $connect->prepare($query1);
-    $check->execute();
-
-
-    if ($check->rowCount() > 0) {
-        $error .= '<li>Dealer ID exist</li>';
+        if ($check->rowCount() > 0) {
+            $error .= '<li>Dealer ID exist</li>';
+        }
     }
+    
+
+
 
     if ($error == '') {
         $data = array(
@@ -114,7 +117,7 @@ if (isset($_GET["action"])) {
                                 <input type="text" name="dealer_id" id="dealer_id" class="form-control" />
                             </div>
                         </div>
-                    
+
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Dealer Name</label>
