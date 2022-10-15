@@ -1,6 +1,6 @@
 <?php
 include 'database_connection.php';
-include 'php_includes/function.php';
+include 'function.php';
 $message = '';
 
 if (isset($_POST["login_button"])) {
@@ -43,8 +43,10 @@ if (isset($_POST["login_button"])) {
 					session_start();
 					$_SESSION['admin_id'] = $row['admin_id'];
 
-					header('location:php_includes/header.php');
-				} else {
+					header('location:admin/index.php');
+				}
+				else
+				{
 					$message = '<li>Wrong Password</li>';
 				}
 			}
