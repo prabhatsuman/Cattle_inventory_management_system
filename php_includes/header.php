@@ -64,7 +64,7 @@
 
         <nav class="sb-topnav navbar navbar-expand navbar-dark ">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">Cattle Mangement</a>
+            <a class="navbar-brand ps-3" href="../php_includes/header.php">Cattle Mangement</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 " id="sidebarToggle" href="#!" style="color:black"><i class="fas fa-bars"></i></button>
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -96,6 +96,7 @@
                             <!-- <a class="nav-link" href="issue_book.php"style="color:white;">Issue Book</a> -->
                             <a class="nav-link" href="../admin/cattle_info.php"style="color:white;">Cattle Information</a>
                             <a class="nav-link" href="../admin/dealers.php"style="color:white;">Dealer Information</a>
+                            <a class="nav-link" href="../admin/production.php"style="color:white;">Production Information</a>
                             <a class="nav-link" href="../admin/expenses.php"style="color:white;">Expenses</a>                            
                             <a class="nav-link" href="../logout.php"style="color:white;">Logout</a>
 
