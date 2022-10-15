@@ -1,13 +1,13 @@
 <?php
 
 //header.php
-include 'functions.php';
-include '../database_connection.php';
+// include 'functions.php';
+// include '../database_connection.php';
 
-if(!is_admin_login())
-{
-    header('location:../login.php');
-}
+// if(!is_admin_login())
+// {
+//     header('location:../login.php');
+// }
 
 ?>
 
@@ -33,6 +33,7 @@ if(!is_admin_login())
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/simple-datatables-style.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/simple-datatables@latest.js"></script>
     
     <!-- Favicons -->
      <link rel="apple-touch-icon" href="" sizes="180x180">
@@ -87,12 +88,13 @@ if(!is_admin_login())
                 <nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion" style="background-color: rgb(89, 212, 109); ">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="category.php" style="color:white;">Category</a>
-                            <a class="nav-link" href="author.php"style="color:white;">Author</a>
-                            <a class="nav-link" href="location_rack.php"style="color:white;">Location Rack</a>
-                            <a class="nav-link" href="book.php"style="color:white;">Book</a>
-                            <a class="nav-link" href="user.php"style="color:white;">User</a>
-                            <a class="nav-link" href="issue_book.php"style="color:white;">Issue Book</a>
+                            <!-- <a class="nav-link" href="category.php" style="color:white;">Category</a> -->
+                            <!-- <a class="nav-link" href="author.php"style="color:white;">Author</a> -->
+                            <!-- <a class="nav-link" href="location_rack.php"style="color:white;">Location Rack</a> -->
+                            <!-- <a class="nav-link" href="book.php"style="color:white;">Book</a> -->
+                            <!-- <a class="nav-link" href="user.php"style="color:white;">User</a> -->
+                            <!-- <a class="nav-link" href="issue_book.php"style="color:white;">Issue Book</a> -->
+                            <a class="nav-link" href="../admin/cattle_info.php"style="color:white;">Cattle Information</a>
                             <a class="nav-link" href="../logout.php"style="color:white;">Logout</a>
 
                         </div>
