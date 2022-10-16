@@ -1,0 +1,52 @@
+body {
+  background-image: url("cb3dc4a7-6d30-449a-8564-fa9f9a45f433.jpeg");
+  background-repeat: no-repeat , repeat;
+  background-position: center;
+  /* Center the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
+  padding-top: 50px;
+  
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: rgb(143, 228, 16);
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: rgba(0, 0, 0, 0.799);
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+.profile {
+  display: flex;
+  padding-top: 8%;
+  
+}
