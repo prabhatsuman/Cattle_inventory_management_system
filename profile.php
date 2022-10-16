@@ -19,7 +19,7 @@
         <div class="name_job">Pranjal Jha</div>
         <div class="rating">
           
-          <h5>Head Production Department</h5>
+          <h5>Fronted Developer</h5>
         </div>
         <p> Contributed in Frontend(mainly in ploting) and in database making and content of slides</p>
         <div class="btns">
@@ -33,7 +33,7 @@
         </div>
         <div class="name_job">Pranav Bharadwaj</div>
         <div class="rating">
-          <h5>Head Sales Department</h5>
+          <h5>Full Stack Developer</h5>
         </div>
         <p> Frontend contribution , Backend contribution , Made ER and Relational Diagrams</p>
         <div class="btns">
@@ -46,7 +46,7 @@
         </div>
         <div class="name_job">Prabhat Suman</div>
           <div class="rating">
-          <h5>Head Of Dealers Department</h5>
+          <h5>Debugger</h5>
         </div>
         <p> Frontend contribution , Backend contribution , contribution in ER and Relational Diagrams</p>
         <div class="btns">

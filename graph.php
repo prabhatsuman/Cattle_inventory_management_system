@@ -50,8 +50,8 @@
     $p_date_all[] = $data4['p_date'];
   }
 
-?> $sum_sale= $query1['COUNT(cattle_id)']; 
-echo $sum_sale;       
+?> <?php $sum_sale= $query1['COUNT(cattle_id)']; 
+echo $sum_sale;       ?>
 
 
 <div style="width: 500px;">
@@ -60,8 +60,8 @@ echo $sum_sale;
 <div style="width: 500px;">
   <canvas id="myChart3"></canvas>
 </div>
-<div style="width: 500px;"> $sum_sale= $query1['COUNT(cattle_id)']; 
-                        echo $sum_sale;       
+<div style="width: 500px;"> <?php $sum_sale= $query1['COUNT(cattle_id)']; 
+                        echo $sum_sale;   ?>    
 
 
 <div style="width: 500px;">
