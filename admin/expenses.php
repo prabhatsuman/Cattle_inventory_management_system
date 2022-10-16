@@ -108,7 +108,7 @@ if (isset($_GET["action"])) {
 
 ?>
 
-        <div class="card mb-4">
+        <div class="card mb-4 p-1">
             <div class="card-header">
                 <i class="fas fa-user-plus"></i> Expenses
             </div>

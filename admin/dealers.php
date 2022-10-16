@@ -46,6 +46,9 @@ if (isset($_POST["add_dealer"])) {
             $error .= '<li>Dealer ID exist</li>';
         }
     }
+    if(strlen($formdata['p_number']) < 10){
+        $error .= '<li>Phone Number must be atleast 10 digits</li>';
+    }
     
 
 
@@ -74,10 +77,20 @@ if (isset($_POST["edit"])) {
     $formdata[':dealer_id'] = trim($_POST['dealer_id']);
     $formdata[':d_address'] = trim($_POST['d_address']);
     $formdata[':p_number'] = trim($_POST['p_number']);
-    $query = "UPDATE dealers SET d_address = :d_address, p_number = :p_number WHERE dealer_id = :dealer_id";
-    $statement = $connect->prepare($query);
-    $statement->execute($formdata);
-    header('location:dealers.php');
+    if(strlen($formdata[':p_number']) < 10){
+        $error .= '<li>Phone Number must be atleast 10 digits</li>';
+    }
+    if($error=='')
+    {
+        $query = "UPDATE dealers SET d_address = :d_address, p_number = :p_number WHERE dealer_id = :dealer_id";
+        $statement = $connect->prepare($query);
+        $statement->execute($formdata);
+        header('location:dealers.php');
+    }
+    // $query = "UPDATE dealers SET d_address = :d_address, p_number = :p_number WHERE dealer_id = :dealer_id";
+    // $statement = $connect->prepare($query);
+    // $statement->execute($formdata);
+    // header('location:dealers.php');
 }
 
 ?>
@@ -97,13 +110,12 @@ include '../php_includes/header.php';
 if (isset($_GET["action"])) {
     if ($_GET['action'] == 'add') {
         if ($error != '') {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"><ul class="list-unstyled">' . $error . '</ul> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"><ul class="list-unstyled">'. $error.'</ul> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
         }
 
 
 ?>
-
-        <div class="card mb-4">
+        <div class="card mb-4 p-1">
             <div class="card-header">
                 <i class="fas fa-user-plus"></i> Add Dealer
             </div>
@@ -158,6 +170,9 @@ if (isset($_GET["action"])) {
         <?php
     } else if ($_GET["action"] == 'edit') {
         $dealer_id = $_GET['code'];
+        if ($error != '') {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"><ul class="list-unstyled">' . $error . '</ul> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+        }
 
 
         $query = "
@@ -169,7 +184,7 @@ if (isset($_GET["action"])) {
         foreach ($dealer_info as $row) {
         ?>
 
-            <div class="card mb-4">
+            <div class="card mb-4 p-1">
                 <div class="card-header">
                     <i class="fas fa-user-plus"></i> Edit Dealer Details
                 </div>

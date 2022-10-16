@@ -51,7 +51,11 @@ if (isset($_POST["sales"])) {
         );
 
 
-
+        if($formdata['cattle_type'] == 'COW'){
+            $data[':price'] = $formdata['quantity'] * 40;
+        }else if($formdata['cattle_type'] == 'BUFFALO'){
+            $data[':price'] = $formdata['quantity'] * 50;
+        }
         $query = "INSERT INTO sales (d_id, s_date, c_type, quantity,sale) VALUES (:dealer_id,curdate(),:cattle_type,:quantity,:price);
         ";
         $statement = $connect->prepare($query);
@@ -113,7 +117,7 @@ if (isset($_GET["action"])) {
 
 ?>
 
-        <div class="card mb-4">
+        <div class="card mb-4 p-1">
             <div class="card-header">
                 <i class="fas fa-user-plus"></i> Sales Information
             </div>
