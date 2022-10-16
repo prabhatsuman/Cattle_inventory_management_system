@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-    <link rel="stylesheet" href="About_style.css">
+    <link rel="stylesheet" href="http://localhost/DBMS_project/About_style.css">
     <title>About us</title>
 </head>
 

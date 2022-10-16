@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
  
-    <link rel="stylesheet" href="profile_style.css">
+    <link rel="stylesheet" href="http://localhost/DBMS_project/profile_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
   </head>
   <body>
@@ -57,7 +57,7 @@
       </body>
 
       <div class="button">
-        <a href="php_includes/header.php">Go Back</a>
+        <a href="http://localhost/DBMS_project/dashboard.php">Go Back</a>
     </div>
   
 </html>
