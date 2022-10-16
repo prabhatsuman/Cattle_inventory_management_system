@@ -70,6 +70,12 @@
 <div style="width: 500px;">
   <canvas id="myChart5"></canvas>
 </div>
+<div style="width: 500px;">
+  <canvas id="myChart6"></canvas>
+</div>
+<div style="width: 500px;">
+  <canvas id="myChart7"></canvas>
+</div>
  
 <script>
   // === include 'setup' then 'config' above ===
@@ -257,7 +263,81 @@ new Chart("myChart5", {
     legend: {display: false}
   }
 });
+var ctx = document.getElementById("myChart6").getContext("2d");
 
+var data = {
+    labels: <?php echo json_encode($p_date) ?>,
+    datasets: [
+        {
+            label: "Cow",
+            backgroundColor: "blue",
+            data: <?php echo json_encode($sum_quantity_cow) ?>
+        },
+        {
+            label: "Buffalo",
+            backgroundColor: "red",
+            data:  <?php echo json_encode($sum_quantity_buff) ?>
+        },
+        
+    ]
+};
+
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      
+        barValueSpacing: 15,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        }
+    }
+});
+<?php
+  $sum_cow=$connect->query("SELECT SUM(quantity) FROM production INNER JOIN cattle WHERE production.c_id=cattle.cattle_id AND cattle.cattle_type='COW';");
+  $sum_buff=$connect->query("SELECT SUM(quantity) FROM production INNER JOIN cattle WHERE production.c_id=cattle.cattle_id AND cattle.cattle_type='BUFFALO';");
+  $result = $sum_cow->fetchAll();
+  $result1 = $sum_buff->fetchAll();
+  foreach($result as $row)
+  {
+    $sum_cow=$row['SUM(quantity)'];
+  }
+  foreach($result1 as $row)
+  {
+    $sum_buff=$row['SUM(quantity)'];
+  }
+  $sum=$sum_cow+$sum_buff;
+  $percent_cow=($sum_cow/$sum)*100;
+  $percent_buff=($sum_buff/$sum)*100;
+
+
+?>
+var xValues = ["Cow", "Buffalo"];
+var yValues = [<?php echo $percent_cow ?>, <?php echo $percent_buff ?>];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("myChart7", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  
+  
+});
 
 </script>
 
