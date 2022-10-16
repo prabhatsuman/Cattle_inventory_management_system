@@ -97,6 +97,7 @@
                             <a class="nav-link" href="../admin/cattle_info.php"style="color:white;">Cattle Information</a>
                             <a class="nav-link" href="../admin/dealers.php"style="color:white;">Dealer Information</a>
                             <a class="nav-link" href="../admin/production.php"style="color:white;">Production Information</a>
+                            <a class="nav-link" href="../admin/sales.php"style="color:white;">Sales Information</a>
                             <a class="nav-link" href="../admin/expenses.php"style="color:white;">Expenses</a>                            
                             <a class="nav-link" href="../logout.php"style="color:white;">Logout</a>
 

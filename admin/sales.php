@@ -12,22 +12,27 @@ $error = '';
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'delete') {
         $query = "
-        DELETE FROM production 
-        WHERE p_id = '".$_GET["code"]."' 
+        DELETE FROM sales 
+        WHERE s_id = '" . $_GET["code"] . "' 
        
         ";
         $statement = $connect->prepare($query);
         $statement->execute();
-        header('location:production.php');
+        header('location:sales.php');
     }
 }
-if (isset($_POST["production"])) {
+if (isset($_POST["sales"])) {
     $formdata = array();
 
-    if (empty($_POST["cattle_id"])) {
-        $error .= '<li>Cattle is required</li>';
+    if (empty($_POST["dealer_id"])) {
+        $error .= '<li>Dealer ID required</li>';
     } else {
-        $formdata['cattle_id'] = $_POST['cattle_id'];
+        $formdata['dealer_id'] = $_POST['dealer_id'];
+    }
+    if (empty($_POST["cattle_type"])) {
+        $error .= '<li>Cattle type is required</li>';
+    } else {
+        $formdata['cattle_type'] = trim($_POST["cattle_type"]);
     }
     if (empty($_POST["quantity"])) {
         $error .= '<li>Milk Quantity is required</li>';
@@ -35,40 +40,47 @@ if (isset($_POST["production"])) {
         $formdata['quantity'] = $_POST['quantity'];
     }
     if ($error == '') {
+
+
         $data = array(
-            ':cattle_id' => $formdata['cattle_id'],
-            ':quantity' => $formdata['quantity']
+            ':dealer_id' => $formdata['dealer_id'],
+            ':cattle_type' => $formdata['cattle_type'],
+            ':quantity' => $formdata['quantity'],
+            ':price' => $formdata['quantity']
 
         );
-        $query = "INSERT INTO production (c_id,quantity,p_date) VALUES (:cattle_id,:quantity,curdate());
+
+
+
+        $query = "INSERT INTO sales (d_id, s_date, c_type, quantity,sale) VALUES (:dealer_id,curdate(),:cattle_type,:quantity,:price);
         ";
         $statement = $connect->prepare($query);
         $statement->execute($data);
-        header('location:production.php');
-        // $message = '<label class="text-success">Expense Added</label>';
+        header('location:sales.php');
     }
-
-
-
-    // if ($error == '') {
-    //     $data = array(
-    //         ':cattle_id'        =>    $formdata['cattle_id'],
-    //         ':cattle_type'        =>    $formdata['cattle_type'],
-    //         ':date_of_birth'    =>    $formdata['date_of_birth'],
-    //         ':Gender'            =>    $formdata['Gender'],
-    //         ':Vaccination'        =>    $formdata['Vaccination'],
-    //         ':milk_status'        =>    $formdata['milk_status'] == "YES" ? 1 : 0,
-
-    //     );
-
-    //     $query = "INSERT INTO cattle (cattle_id, cattle_type, sex, DOB, vaccination, milk_status) VALUES (:cattle_id, :cattle_type, :Gender, :date_of_birth, :Vaccination, :milk_status);";
-
-    //     $statement = $connect->prepare($query);
-
-    //     $statement->execute($data);
-
-    
+    // $message = '<label class="text-success">Expense Added</label>';
 }
+
+
+
+// if ($error == '') {
+//     $data = array(
+//         ':cattle_id'        =>    $formdata['cattle_id'],
+//         ':cattle_type'        =>    $formdata['cattle_type'],
+//         ':date_of_birth'    =>    $formdata['date_of_birth'],
+//         ':Gender'            =>    $formdata['Gender'],
+//         ':Vaccination'        =>    $formdata['Vaccination'],
+//         ':milk_status'        =>    $formdata['milk_status'] == "YES" ? 1 : 0,
+
+//     );
+
+//     $query = "INSERT INTO cattle (cattle_id, cattle_type, sex, DOB, vaccination, milk_status) VALUES (:cattle_id, :cattle_type, :Gender, :date_of_birth, :Vaccination, :milk_status);";
+
+//     $statement = $connect->prepare($query);
+
+//     $statement->execute($data);
+
+
 
 // else if($_GET['action'] == 'delete')
 // {
@@ -81,7 +93,7 @@ if (isset($_POST["production"])) {
 ?>
 <?php
 
-$query = "SELECT * FROM production ORDER BY p_id ASC;";
+$query = "SELECT * FROM sales ORDER BY s_id ASC;";
 
 
 $statement = $connect->prepare($query);
@@ -103,28 +115,37 @@ if (isset($_GET["action"])) {
 
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-user-plus"></i> Production Information
+                <i class="fas fa-user-plus"></i> Sales Information
             </div>
             <div class="card-body">
                 <form method="post">
                     <div class="row">
 
-                        <div class="col-md-6">
-                            <label class="form-label">Select Cattle</label>
-                            <select name="cattle_id" id="cattle_id" class="form-control">
-                                <?php echo fill_cattle_ID($connect); ?>
+                        <div class="col-md-4">
+                            <label class="form-label">Select Dealer</label>
+                            <select name="dealer_id" id="dealer_id" class="form-control">
+                                <?php echo fill_Dealer_ID($connect); ?>
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label class="form-label">Cattle Type</label>
+                            <select name="cattle_type" id="cattle_type" class="form-control">
+                                <option value="none" selected disabled hidden>Select Cattle Type</option>
+                                <option value="COW">Cow</option>
+                                <option value="BUFFALO">Buffalo</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Quantity of Milk</label>
                                 <!-- input date in form -->
-                                <input type="text" name="quantity" id="qunatity" class="form-control" />
+                                <input type="text" name="quantity" id="quantity" class="form-control" />
                             </div>
                         </div>
                     </div>
                     <div class="mt-4 mb-3 text-center">
-                        <input type="submit" name="production" class="btn btn-success" value="Add" />
+                        <input type="submit" name="sales" class="btn btn-success" value="Add" />
                     </div>
                 </form>
             </div>
@@ -140,10 +161,10 @@ if (isset($_GET["action"])) {
         <div class="card-header">
             <div class="row">
                 <div class="col col-md-6">
-                    <i class="fas fa-table me-1"></i> Production Information
+                    <i class="fas fa-table me-1"></i> Sales Information
                 </div>
                 <div class="col col-md-6" align="right">
-                    <a href="production.php?action=add" class="btn btn-success btn-sm">Add</a>
+                    <a href="sales.php?action=add" class="btn btn-success btn-sm">Add</a>
                 </div>
             </div>
         </div>
@@ -152,9 +173,11 @@ if (isset($_GET["action"])) {
                 <thead>
                     <tr>
                         <th>S No.</th>
-                        <th>Cattle ID</th>
+                        <th>Dealer ID</th>
                         <th>Date</th>
-                        <th>Qunatity of Milk</th>
+                        <th>Cattle Type</th>
+                        <th>Quantity of Milk</th>
+                        <th>Sale Amount</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -162,11 +185,12 @@ if (isset($_GET["action"])) {
 
                     <tr>
                         <th>S No.</th>
-                        <th>Cattle ID</th>
+                        <th>Dealer ID</th>
                         <th>Date</th>
+                        <th>Cattle Type</th>
                         <th>Quantity of Milk</th>
+                        <th>Sale Amount</th>
                         <th>Action</th>
-
                     </tr>
                 </tfoot>
                 <tbody>
@@ -179,11 +203,13 @@ if (isset($_GET["action"])) {
                     ?>
                         <tr>
                             <td><?php echo $count; ?></td>
-                            <td><?php echo $row['c_id']; ?></td>
-                            <td><?php echo $row['p_date']; ?></td>
+                            <td><?php echo $row['d_id']; ?></td>
+                            <td><?php echo $row['s_date']; ?></td>
+                            <td><?php echo $row['c_type']; ?></td>
                             <td><?php echo $row['quantity']; ?></td>
+                            <td><?php echo $row['sale']; ?></td>
                             <td>
-                                <button type="button" name="delete" class="btn btn-danger btn-xs delete" onclick="delete_data(<?php echo $row['p_id'] ?>)">Delete</button>
+                                <button type="button" name="delete" class="btn btn-danger btn-xs delete" onclick="delete_data(<?php echo $row['s_id'] ?>)">Delete</button>
                             </td>
 
 
@@ -207,7 +233,7 @@ if (isset($_GET["action"])) {
     <script>
         function delete_data(code) {
             if (confirm("Are you sure you want to delete?")) {
-                window.location.href = "production.php?action=delete&code=" + code;
+                window.location.href = "sales.php?action=delete&code=" + code;
             } else {
                 return false;
             }

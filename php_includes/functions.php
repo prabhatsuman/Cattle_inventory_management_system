@@ -37,4 +37,21 @@ function fill_cattle_ID($connect)
 
 	return $output;
 }
+function fill_Dealer_ID($connect)
+{
+	$query = "
+	SELECT dealer_id FROM dealers ORDER BY dealer_id ASC;
+	";
+
+	$result = $connect->query($query);
+
+	$output = '<option value="">Select Dealer</option>';
+
+	foreach($result as $row)
+	{
+		$output .= '<option value="'.$row["dealer_id"].'">'.$row["dealer_id"].'</option>';
+	}
+
+	return $output;
+}
 ?>

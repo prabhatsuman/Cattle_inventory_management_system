@@ -52,6 +52,7 @@ if (isset($_POST["expenses"])) {
         $statement = $connect->prepare($query);
         $statement->execute($data);
         $message = '<label class="text-success">Expense Added</label>';
+        header('location:expenses.php');
     }
 
   
@@ -73,7 +74,7 @@ if (isset($_POST["expenses"])) {
 
     //     $statement->execute($data);
 
-        header('location:expenses.php');
+        
     }
 
     // else if($_GET['action'] == 'delete')
