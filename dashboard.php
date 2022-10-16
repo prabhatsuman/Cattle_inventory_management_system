@@ -66,15 +66,19 @@
 <div style="width: 500px;">
   <canvas id="myChart4"></canvas>
 </div>
+
+<div style="width: 500px;">
+  <canvas id="myChart5"></canvas>
+</div>
  
 <script>
   // === include 'setup' then 'config' above ===
-  const labels = <?php echo json_encode($s_date) ?>;
-  const data = {
-    labels: labels,
+  new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: <?php echo json_encode($s_date) ?>,
     datasets: [{
       label: 'SALES',
-      data: <?php echo json_encode($sum_sale) ?>,
       backgroundColor: [
         'rgba(11, 156, 49, 0.2)',
         'rgba(11, 156, 49, 0.2)',
@@ -98,34 +102,25 @@
         'rgb(11, 156, 49,1)',
         'rgb(11, 156, 49,1)'
       ],
-      borderWidth: 1
+      borderWidth: 1,
+      data: <?php echo json_encode($sum_sale) ?>
     }]
-  };
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "cow producyion"
+    }
+  }
+});
 
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
-
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-
-  // === include 'setup' then 'config' above ===
-  const labels2 = <?php echo json_encode($p_date) ?>;
-  const data2 = {
-    labels: labels2,
+new Chart("myChart2", {
+  type: "bar",
+  data: {
+    labels: <?php echo json_encode($p_date) ?>,
     datasets: [{
       label: 'PRODUCTION BY COW',
-      data: <?php echo json_encode($sum_quantity_cow) ?>,
       backgroundColor: [
         'rgba(255,105,180,0.5)',
         'rgba(255,105,180,0.5)',
@@ -152,35 +147,26 @@
         'rgba(255,20,147,0.5)',
         'rgba(255,20,147,0.5)'
       ],
-      borderWidth: 1
+      borderWidth: 1,
+      data: <?php echo json_encode($sum_quantity_cow) ?>
     }]
-  };
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "cow producyion"
+    }
+  }
+});
 
 
-  const config2 = {
-    type: 'bar',
-    data:data2,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
-
-  var myChart2 = new Chart(
-    document.getElementById('myChart2'),
-    config2
-  );
-
-
-
-  const data3 = {
-    labels: labels2,
+new Chart("myChart3", {
+  type: "bar",
+  data: {
+    labels: <?php echo json_encode($p_date) ?>,
     datasets: [{
       label: 'PRODUCTION BY BUFFALO',
-      data: <?php echo json_encode($sum_quantity_buff) ?>,
       backgroundColor: [
         'rgba(137, 196, 244,0.5)',
         'rgba(137, 196, 244,0.5)',
@@ -206,26 +192,19 @@
         'rgba(30, 139, 195,0.5)',
         'rgba(30, 139, 195,0.5)'
       ],
-      borderWidth: 1
+      borderWidth: 1,
+      data: <?php echo json_encode($sum_quantity_buff) ?>
     }]
-  };
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "cow producyion"
+    }
+  }
+});
 
-  const config3 = {
-    type: 'bar',
-    data:data3,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
-
-  var myChart3 = new Chart(
-    document.getElementById('myChart3'),
-    config3
-  );
 
 
 var xValues = <?php echo json_encode($p_date_all) ?>;
@@ -233,10 +212,10 @@ var yValues =<?php echo json_encode($sum_quantity) ?>
 
 new Chart("myChart4", {
   type: "line",
-  label:"TOTAL PRODUCTION",
   data: {
     labels: xValues,
     datasets: [{
+        label: 'TOTAL PRODUCTION',
       fill: false,
       lineTension: 0,
       backgroundColor: 'rgba(11, 156, 49, 0.2)',
@@ -245,13 +224,39 @@ new Chart("myChart4", {
     }]
   },
   options: {
-    legend: {display: false},
     scales: {
       yAxes: [{ticks: {min: 6, max:16}}],
     }
   }
 });
 
+
+
+new Chart("myChart5", {
+  type: "line",
+  data: {
+    labels: <?php echo json_encode($p_date) ?>,
+    datasets: [{
+        label: ' COW',
+      data: <?php echo json_encode($sum_quantity_cow) ?>,
+      borderColor: "PINK",
+      fill: false
+    },{
+        label: ' BUFFALO',
+      data: <?php echo json_encode($sum_quantity_buff) ?>,
+      borderColor: "BLUE",
+      fill: false
+    },{
+        label: ' TOTAL',
+      data: <?php echo json_encode($sum_quantity) ?>,
+      borderColor: "GREEN",
+      fill: false
+    }]
+  },
+  options: {
+    legend: {display: false}
+  }
+});
 
 
 </script>

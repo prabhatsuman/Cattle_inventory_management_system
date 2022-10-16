@@ -22,45 +22,26 @@
   }
 
 
-  $query2 = $con->query("
-  SELECT SUM(quantity),p_date FROM production where c_id LIKE 'C%'GROUP BY p_date;
-  ");
-  foreach($query2 as $data2)
-  {
-    $sum_quantity_cow[] = $data2['SUM(quantity)'];
-    $p_date[] = $data2['p_date'];
-  }
-
-
-  $query3 = $con->query("
-  SELECT SUM(quantity),p_date FROM production where c_id LIKE 'B%'GROUP BY p_date;
-  ");
-  foreach($query3 as $data3)
-  {
-    $sum_quantity_buff[] = $data2['SUM(quantity)'];
-    $p_date_c[] = $data2['p_date'];
-  }
-
 ?>
 
 
 <div style="width: 500px;">
   <canvas id="myChart"></canvas>
 </div>
-
-<div style="width: 500px;">
-  <canvas id="myChart2"></canvas>
-</div>
+<p id="test"></p>
  
 <script>
-  // === include 'setup' then 'config' above ===
-  const labels = <?php echo json_encode($p_date) ?>;
-  const data = {
-    labels: labels,
+
+  new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: <?php echo json_encode($s_date) ?>,
     datasets: [{
-      label: 'production',
-      data: <?php echo json_encode($sum_quantity_buff) ?>,
+      label: 'SALES',
       backgroundColor: [
+        'rgba(11, 156, 49, 0.2)',
+        'rgba(11, 156, 49, 0.2)',
+        'rgba(11, 156, 49, 0.2)',
         'rgba(11, 156, 49, 0.2)',
         'rgba(11, 156, 49, 0.2)',
         'rgba(11, 156, 49, 0.2)',
@@ -75,37 +56,25 @@
         'rgb(11, 156, 49,1)',
         'rgb(11, 156, 49,1)',
         'rgb(11, 156, 49,1)',
+        'rgb(11, 156, 49,1)',
+        'rgb(11, 156, 49,1)',
+        'rgb(11, 156, 49,1)',
         'rgb(11, 156, 49,1)'
       ],
-      borderWidth: 1
+      borderWidth: 1,
+      data: <?php echo json_encode($sum_sale) ?>
     }]
-  };
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "cow producyion"
+    }
+  }
+});
 
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
-
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-  var myChart2 = new Chart(
-    document.getElementById('myChart2'),
-    config
-  );
-
-
-  
 </script>
-//cow graph
 
 </body>
 </html>
