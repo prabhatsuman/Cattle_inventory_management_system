@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,336 +8,275 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Document</title>
 </head>
+
 <body>
 
-<?php 
+
+
+
+  <div style="width: 500px;">
+    <canvas id="myChart6"></canvas>
+  </div>
+  <div style="width: 500px;">
+    <canvas id="myChart7"></canvas>
+  </div>
+
+  <div style="width: 500px;">
+    <canvas id="myChart8"></canvas>
+  </div>
+
+  <div style="width: 500px;">
+    <canvas id="myChart9"></canvas>
+  </div>
+
+
+  <?php
   include 'database_connection.php';
-  $query1 = $connect->query("
-  SELECT SUM(sale),s_date from sales GROUP BY s_date;
-  ");
+  $query7 = $connect->query("SELECT SUM(production.quantity) as cow,p_date FROM production INNER JOIN cattle WHERE cattle.cattle_id=production.c_id AND cattle.cattle_type='COW' GROUP BY production.p_date;");
+  $res7 = $query7->fetchAll();
+  $sum_quantity_cow = array();
+  $sum_cow_date = array();
+  $query8 = $connect->query("SELECT SUM(production.quantity) as buffalo,production.p_date FROM production INNER JOIN cattle WHERE cattle.cattle_id=production.c_id AND cattle.cattle_type='BUFFALO' GROUP BY production.p_date;");
+  $res8 = $query8->fetchAll();
+  $query9 = $connect->query("SELECT DISTINCT p_date FROM production;");
+  $res9 = $query9->fetchAll();
+  $sum_quantity_buffalo = array();
+  $sum_buffalo_date = array();
 
-  foreach($query1 as $data)
-  {
-    $sum_sale[] = $data['SUM(sale)'];
-    $s_date[] = $data['s_date'];
+
+  $sum_quantity_cow = array();
+  $sum_cow_date = array();
+  $date=array();
+  foreach ($res7 as $row) {
+    $sum_quantity_cow[] = $row['cow'];
+    $sum_cow_date[] = $row['p_date'];
+    
   }
-
-
-  $query2 = $connect->query("
-  SELECT SUM(quantity),p_date FROM production where c_id LIKE 'C%'GROUP BY p_date;
-  ");
-  foreach($query2 as $data2)
-  {
-    $sum_quantity_cow[] = $data2['SUM(quantity)'];
-    $p_date[] = $data2['p_date'];
+  foreach ($res8 as $row) {
+    $sum_quantity_buffalo[] = $row['buffalo'];
+    $sum_buffalo_date[] = $row['p_date'];
   }
-
-
-  $query3 = $connect->query("
-  SELECT SUM(quantity),p_date FROM production where c_id LIKE 'B%'GROUP BY p_date;
-  ");
-  foreach($query3 as $data3)
-  {
-    $sum_quantity_buff[] = $data3['SUM(quantity)'];
-    $p_date_c[] = $data3['p_date'];
+  foreach ($res9 as $row) {
+    $date[] = $row['p_date'];
   }
+  $cow1=array(
+    'cow'=>$sum_quantity_cow,
+    'date'=>$sum_cow_date
+  );
+  
+  $buffalo1=array(
+    'buffalo'=>$sum_quantity_buffalo,
+    'date'=>$sum_buffalo_date
+  
+  );
+  // echo"<br>";
+  // // print_r($cow1) ;
+  // echo"<br>";
+  // // echo count($cow1['cow']);
+  // echo"<br>";
+  $cow = array();
+  $buffalo = array();
+  for($j=0;$j<count($date);$j++){
 
-  $query4 = $connect->query("
-  SELECT SUM(quantity),p_date FROM production GROUP BY p_date;
-  ");
-  foreach($query4 as $data4)
-  {
-    $sum_quantity[] = $data4['SUM(quantity)'];
-    $p_date_all[] = $data4['p_date'];
-  }
-
-?> <?php $sum_sale= $query1['COUNT(cattle_id)']; 
-echo $sum_sale;       ?>
-
-
-<div style="width: 500px;">
-  <canvas id="myChart2"></canvas>
-</div>
-<div style="width: 500px;">
-  <canvas id="myChart3"></canvas>
-</div>
-<div style="width: 500px;"> <?php $sum_sale= $query1['COUNT(cattle_id)']; 
-                        echo $sum_sale;   ?>    
-
-
-<div style="width: 500px;">
-  <canvas id="myChart5"></canvas>
-</div>
-<div style="width: 500px;">
-  <canvas id="myChart6"></canvas>
-</div>
-<div style="width: 500px;">
-  <canvas id="myChart7"></canvas>
-</div>
- 
-<script>
-  // === include 'setup' then 'config' above ===
-  new Chart("myChart", {
-  type: "bar",
-  data: {
-    labels: <?php echo json_encode($s_date) ?>,
-    datasets: [{
-      label: 'SALES',
-      backgroundColor: [
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)',
-        'rgba(11, 156, 49, 0.2)'
-      ],
-      borderColor: [
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)',
-        'rgb(11, 156, 49,1)'
-      ],
-      borderWidth: 1,
-      data: <?php echo json_encode($sum_sale) ?>
-    }]
-  },
-  options: {
-    legend: {display: false},
-    title: {
-      display: true,
-      text: "cow producyion"
-    }
-  }
-});
-
-new Chart("myChart2", {
-  type: "bar",
-  data: {
-    labels: <?php echo json_encode($p_date) ?>,
-    datasets: [{
-      label: 'PRODUCTION BY COW',
-      backgroundColor: [
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)',
-        'rgba(255,105,180,0.5)'
-      ],
-      borderColor: [
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)',
-        'rgba(255,20,147,0.5)'
-      ],
-      borderWidth: 1,
-      data: <?php echo json_encode($sum_quantity_cow) ?>
-    }]
-  },
-  options: {
-    legend: {display: false},
-    title: {
-      display: true,
-      text: "cow producyion"
-    }
-  }
-});
-
-
-new Chart("myChart3", {
-  type: "bar",
-  data: {
-    labels: <?php echo json_encode($p_date) ?>,
-    datasets: [{
-      label: 'PRODUCTION BY BUFFALO',
-      backgroundColor: [
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)',
-        'rgba(137, 196, 244,0.5)'
-      ],
-      borderColor: [
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)',
-        'rgba(30, 139, 195,0.5)'
-      ],
-      borderWidth: 1,
-      data: <?php echo json_encode($sum_quantity_buff) ?>
-    }]
-  },
-  options: {
-    legend: {display: false},
-    title: {
-      display: true,
-      text: "cow producyion"
-    }
-  }
-});
-
-
-
-var xValues = <?php echo json_encode($p_date_all) ?>;
-var yValues =<?php echo json_encode($sum_quantity) ?>
-
-new Chart("myChart4", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-        label: 'TOTAL PRODUCTION',
-      fill: false,
-      lineTension: 0,
-      backgroundColor: 'rgba(11, 156, 49, 0.2)',
-      borderColor: 'rgba(11, 156, 49, 0.2)',
-      data: yValues
-    }]
-  },
-  options: {
-    scales: {
-      yAxes: [{ticks: {min: 6, max:16}}],
-    }
-  }
-});
-
-
-
-new Chart("myChart5", {
-  type: "line",
-  data: {
-    labels: <?php echo json_encode($p_date) ?>,
-    datasets: [{
-        label: ' COW',
-      data: <?php echo json_encode($sum_quantity_cow) ?>,
-      borderColor: "PINK",
-      fill: false
-    },{
-        label: ' BUFFALO',
-      data: <?php echo json_encode($sum_quantity_buff) ?>,
-      borderColor: "BLUE",
-      fill: false
-    },{
-        label: ' TOTAL',
-      data: <?php echo json_encode($sum_quantity) ?>,
-      borderColor: "GREEN",
-      fill: false
-    }]
-  },
-  options: {
-    legend: {display: false}
-  }
-});
-var ctx = document.getElementById("myChart6").getContext("2d");
-
-var data = {
-    labels: <?php echo json_encode($p_date) ?>,
-    datasets: [
-        {
-            label: "Cow",
-            backgroundColor: "blue",
-            data: <?php echo json_encode($sum_quantity_cow) ?>
-        },
-        {
-            label: "Buffalo",
-            backgroundColor: "red",
-            data:  <?php echo json_encode($sum_quantity_buff) ?>
-        },
-        
-    ]
-};
-
-var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
+    $temp = $date[$j];
+    echo $temp;
+    echo "<br>";
+    $flag = 0;
+    for ($i = 0; $i < count($cow1['date']); $i++) {
+     
+      if ($temp == $cow1['date'][$i]) {
+        $flag = 1;
+        array_push($cow, $cow1['cow'][$i]);
+        break;
+      }
       
-        barValueSpacing: 15,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    min: 0,
-                }
-            }]
-        }
+      }
+      if($flag==0){
+        array_push($cow,0);
     }
-});
-<?php
-  $sum_cow=$connect->query("SELECT SUM(quantity) FROM production INNER JOIN cattle WHERE production.c_id=cattle.cattle_id AND cattle.cattle_type='COW';");
-  $sum_buff=$connect->query("SELECT SUM(quantity) FROM production INNER JOIN cattle WHERE production.c_id=cattle.cattle_id AND cattle.cattle_type='BUFFALO';");
+  }
+  print_r($cow);
+  for($j=0;$j<count($date);$j++){
+
+    $temp = $date[$j];
+    echo $temp;
+    echo "<br>";
+    $flag = 0;
+    for ($i = 0; $i < count($buffalo1['date']); $i++) {
+     
+      if ($temp == $buffalo1['date'][$i]) {
+        $flag = 1;
+        array_push($buffalo, $buffalo1['buffalo'][$i]);
+        break;
+      }
+      
+      }
+      if($flag==0){
+        array_push($buffalo,0);
+    }
+  }
+  // print_r($cow) ;
+
+
+  $sum_cow = $connect->query("SELECT SUM(quantity) FROM production INNER JOIN cattle WHERE production.c_id=cattle.cattle_id AND cattle.cattle_type='COW';");
+  $sum_buff = $connect->query("SELECT SUM(quantity) FROM production INNER JOIN cattle WHERE production.c_id=cattle.cattle_id AND cattle.cattle_type='BUFFALO';");
   $result = $sum_cow->fetchAll();
   $result1 = $sum_buff->fetchAll();
-  foreach($result as $row)
-  {
-    $sum_cow=$row['SUM(quantity)'];
+  foreach ($result as $row) {
+    $sum_cow = $row['SUM(quantity)'];
   }
-  foreach($result1 as $row)
-  {
-    $sum_buff=$row['SUM(quantity)'];
+  foreach ($result1 as $row) {
+    $sum_buff = $row['SUM(quantity)'];
   }
-  $sum=$sum_cow+$sum_buff;
-  $percent_cow=($sum_cow/$sum)*100;
-  $percent_buff=($sum_buff/$sum)*100;
+  $sum = $sum_cow + $sum_buff;
+  $percent_cow = ($sum_cow / $sum) * 100;
+  $percent_buff = ($sum_buff / $sum) * 100;
+  ?>
+
+  <script>
+    new Chart("myChart5", {
+      type: "line",
+      data: {
+        labels: <?php echo json_encode($p_date) ?>,
+        datasets: [{
+          label: ' COW',
+          data: <?php echo json_encode($sum_quantity_cow) ?>,
+          borderColor: "PINK",
+          fill: false
+        }, {
+          label: ' BUFFALO',
+          data: <?php echo json_encode($sum_quantity_buff) ?>,
+          borderColor: "BLUE",
+          fill: false
+        }, {
+          label: ' TOTAL',
+          data: <?php echo json_encode($sum_quantity) ?>,
+          borderColor: "GREEN",
+          fill: false
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        }
+      }
+    });
+    var ctx = document.getElementById("myChart6").getContext("2d");
+
+    var data = {
+      labels: <?php echo json_encode($date) ?>,
+      datasets: [{
+          label: "Cow",
+          backgroundColor: "blue",
+          data: <?php echo json_encode($cow) ?>
+        },
+        {
+          label: "Buffalo",
+          backgroundColor: "red",
+          data: <?php echo json_encode($buffalo) ?>
+        },
+
+      ]
+    };
+
+    var myBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+
+        barValueSpacing: 15,
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0,
+            }
+          }]
+        }
+      }
+    });
+    <?php
 
 
-?>
-var xValues = ["Cow", "Buffalo"];
-var yValues = [<?php echo $percent_cow ?>, <?php echo $percent_buff ?>];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
 
-new Chart("myChart7", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  
-  
-});
+    ?>
+    var xValues = ["Cow", "Buffalo"];
+    var yValues = [<?php echo $percent_cow ?>, <?php echo $percent_buff ?>];
+    var barColors = [
+      "#b91d47",
+      "#00aba9",
+      "#2b5797",
+      "#e8c3b9",
+      "#1e7145"
+    ];
 
-</script>
+    new Chart("myChart7", {
+      type: "pie",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+
+
+    });
+
+
+    new Chart("myChart8", {
+      type: "bar",
+      data: {
+        labels: <?php echo json_encode($months) ?>,
+        datasets: [{
+          label: 'PROFIT',
+          backgroundColor: [
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)',
+            'rgba(137, 196, 244,0.5)'
+          ],
+          borderColor: [
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)',
+            'rgba(30, 139, 195,0.5)'
+          ],
+          borderWidth: 1,
+          data: <?php echo json_encode($profit) ?>
+        }]
+      },
+      options: {}
+    });
+
+
+    var ctx2 = document.getElementById("myChart9").getContext('2d');
+    var myChart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'LEGEND',
+          data: [9, 14, -4, 15, -8, 10]
+        }]
+      },
+      options: {}
+
+    });
+  </script>
 
 </body>
+
 </html>
