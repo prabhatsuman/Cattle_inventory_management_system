@@ -28,6 +28,7 @@
     <script src="http://localhost/DBMS_project/js/scripts.js"></script>
     <script src="http://localhost/DBMS_project/js/select2.min.js"></script>
     <script src="http://localhost/DBMS_project/js/font-awesome-5-all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="">
 
     <link rel="stylesheet" href="http://localhost/DBMS_project/css/bootstrap.css">

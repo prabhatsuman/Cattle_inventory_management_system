@@ -13,7 +13,7 @@ if (isset($_GET['action'])) {
     if ($_GET['action'] == 'delete') {
         $query = "
         DELETE FROM production 
-        WHERE p_id = '".$_GET["code"]."' 
+        WHERE p_id = '" . $_GET["code"] . "' 
        
         ";
         $statement = $connect->prepare($query);
@@ -67,7 +67,7 @@ if (isset($_POST["production"])) {
 
     //     $statement->execute($data);
 
-    
+
 }
 
 // else if($_GET['action'] == 'delete')
@@ -143,7 +143,9 @@ if (isset($_GET["action"])) {
                     <i class="fas fa-table me-1"></i> Production Information
                 </div>
                 <div class="col col-md-6" align="right">
-                    <a href="production.php?action=add" class="btn btn-success btn-sm">Add</a>
+                    <?php if ($_SESSION['admin_id'] == 101) { ?>
+                        <a href="production.php?action=add" class="btn btn-success btn-sm">Add</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -155,7 +157,9 @@ if (isset($_GET["action"])) {
                         <th>Cattle ID</th>
                         <th>Date</th>
                         <th>Qunatity of Milk</th>
-                        <th>Action</th>
+                        <?php if ($_SESSION['admin_id'] == 101) { ?>
+                            <th>Action</th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tfoot>
@@ -165,7 +169,9 @@ if (isset($_GET["action"])) {
                         <th>Cattle ID</th>
                         <th>Date</th>
                         <th>Quantity of Milk</th>
-                        <th>Action</th>
+                        <?php if ($_SESSION['admin_id'] == 101) { ?>
+                            <th>Action</th>
+                        <?php } ?>
 
                     </tr>
                 </tfoot>
@@ -182,10 +188,11 @@ if (isset($_GET["action"])) {
                             <td><?php echo $row['c_id']; ?></td>
                             <td><?php echo $row['p_date']; ?></td>
                             <td><?php echo $row['quantity']; ?></td>
+                            <?php if ($_SESSION['admin_id'] == 101) { ?>
                             <td>
                                 <button type="button" name="delete" class="btn btn-danger btn-xs delete" onclick="delete_data(<?php echo $row['p_id'] ?>)">Delete</button>
                             </td>
-
+                            <?php }?>
 
 
                         </tr>

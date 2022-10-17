@@ -168,7 +168,9 @@ if (isset($_GET["action"])) {
                     <i class="fas fa-table me-1"></i> Sales Information
                 </div>
                 <div class="col col-md-6" align="right">
+                <?php if($_SESSION['admin_id']==102){?>
                     <a href="sales.php?action=add" class="btn btn-success btn-sm">Add</a>
+                    <?php }?>
                 </div>
             </div>
         </div>
@@ -182,7 +184,9 @@ if (isset($_GET["action"])) {
                         <th>Cattle Type</th>
                         <th>Quantity of Milk</th>
                         <th>Sale Amount</th>
+                        <?php if($_SESSION['admin_id']==102){?>
                         <th>Action</th>
+                        <?php }?>
                     </tr>
                 </thead>
                 <tfoot>
@@ -194,7 +198,9 @@ if (isset($_GET["action"])) {
                         <th>Cattle Type</th>
                         <th>Quantity of Milk</th>
                         <th>Sale Amount</th>
+                        <?php if($_SESSION['admin_id']==102){?>
                         <th>Action</th>
+                        <?php }?>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -212,9 +218,11 @@ if (isset($_GET["action"])) {
                             <td><?php echo $row['c_type']; ?></td>
                             <td><?php echo $row['quantity']; ?></td>
                             <td><?php echo $row['sale']; ?></td>
+                            <?php if($_SESSION['admin_id']==102){?>
                             <td>
                                 <button type="button" name="delete" class="btn btn-danger btn-xs delete" onclick="delete_data(<?php echo $row['s_id'] ?>)">Delete</button>
                             </td>
+                            <?php }?>
 
 
 

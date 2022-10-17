@@ -262,7 +262,8 @@ if (isset($_GET["action"])) {
                                 <i class="fas fa-table me-1"></i> Cattle Information
                             </div>
                             <div class="col col-md-6" align="right">
-                                <a href="cattle_info.php?action=add" class="btn btn-success btn-sm">Add</a>
+                                <?php if($_SESSION['admin_id']==101) echo ' <a href="cattle_info.php?action=add" class="btn btn-success btn-sm">Add</a>'?>
+                                
                             </div>
                         </div>
                     </div>
@@ -276,7 +277,9 @@ if (isset($_GET["action"])) {
                                     <th>Gender</th>
                                     <th>Vaccination Status</th>
                                     <th>Milk Production Status</th>
+                                    <?php if($_SESSION['admin_id']==101){?>
                                     <th>Action</th>
+                                    <?php }?>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -287,7 +290,9 @@ if (isset($_GET["action"])) {
                                     <th>Gender</th>
                                     <th>Vaccination Status</th>
                                     <th>Milk Production Status</th>
+                                    <?php if($_SESSION['admin_id']==101){?>
                                     <th>Action</th>
+                                    <?php }?>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -309,7 +314,9 @@ if (isset($_GET["action"])) {
                                         <td><?php echo $row['sex']; ?></td>
                                         <td><?php echo $row['vaccination']; ?></td>
                                         <td><?php echo $milk_status1; ?></td>
+                                        <?php if($_SESSION['admin_id']==101){?>
                                         <td><a href="cattle_info.php?action=edit&code=<?php echo ($row['cattle_id']) ?>" class="btn btn-sm btn-primary">Edit</a></td>
+                                        <?php }?>
                                     </tr>
 
 

@@ -229,7 +229,9 @@ if (isset($_GET["action"])) {
                                 <i class="fas fa-table me-1"></i> Dealer Information
                             </div>
                             <div class="col col-md-6" align="right">
+                                <?php if($_SESSION['admin_id']==102){?>
                                 <a href="dealers.php?action=add" class="btn btn-success btn-sm">Add</a>
+                                <?php }?>
                             </div>
                         </div>
                     </div>
@@ -241,6 +243,9 @@ if (isset($_GET["action"])) {
                                     <th>Dealer Name</th>
                                     <th>Address</th>
                                     <th>Phone Number</th>
+                                    <?php if($_SESSION['admin_id']==102){?>
+                                    <th>Action</th>
+                                    <?php }?>
 
                                 </tr>
                             </thead>
@@ -250,6 +255,9 @@ if (isset($_GET["action"])) {
                                     <th>Dealer Name</th>
                                     <th>Address</th>
                                     <th>Phone Number</th>
+                                    <?php if($_SESSION['admin_id']==102){?>
+                                    <th>Action</th>
+                                    <?php }?>
 
                                 </tr>
                             </tfoot>
@@ -263,8 +271,9 @@ if (isset($_GET["action"])) {
                                         <td><?php echo $row['dealer_name']; ?></td>
                                         <td><?php echo $row['d_address']; ?></td>
                                         <td><?php echo $row['p_number']; ?></td>
-
+                                        <?php if($_SESSION['admin_id']==102){?>
                                         <td><a href="dealers.php?action=edit&code=<?php echo ($row['dealer_id']) ?>" class="btn btn-sm btn-primary">Edit</a></td>
+                                        <?php }?>
                                     </tr>
 
 

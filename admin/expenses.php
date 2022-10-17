@@ -9,13 +9,11 @@ if (!is_admin_login()) {
 $message = '';
 
 $error = '';
-if(isset($_GET['action']))
-{
-    if($_GET['action'] == 'delete')
-    {
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'delete') {
         $query = "
         DELETE FROM expenses 
-        WHERE expenses_id = '".$_GET["code"]."'
+        WHERE expenses_id = '" . $_GET["code"] . "'
         ";
         $statement = $connect->prepare($query);
         $statement->execute();
@@ -30,20 +28,16 @@ if (isset($_POST["expenses"])) {
     } else {
         $formdata['e_type'] = $_POST['e_type'];
     }
-    if(empty($_POST["money_spent"]))
-    {
+    if (empty($_POST["money_spent"])) {
         $error .= '<li>Expense Amount is required</li>';
-    }
-    else
-    {
+    } else {
         $formdata['money_spent'] = $_POST['money_spent'];
     }
-   if($error=='')
-    {
+    if ($error == '') {
         $data = array(
             ':e_type' => $formdata['e_type'],
             ':money_spent' => $formdata['money_spent']
-            
+
         );
         $query = "
         INSERT INTO expenses (e_date,e_type, money_spent) 
@@ -55,7 +49,7 @@ if (isset($_POST["expenses"])) {
         header('location:expenses.php');
     }
 
-  
+
 
     // if ($error == '') {
     //     $data = array(
@@ -74,16 +68,16 @@ if (isset($_POST["expenses"])) {
 
     //     $statement->execute($data);
 
-        
-    }
 
-    // else if($_GET['action'] == 'delete')
-    // {
-    //     $query = "DELETE FROM expenses WHERE e_id = '".$_GET["code"]."'";
-    //     $statement = $connect->prepare($query);
-    //     $statement->execute();
-    //     // header('location:expenses.php');
-    // }
+}
+
+// else if($_GET['action'] == 'delete')
+// {
+//     $query = "DELETE FROM expenses WHERE e_id = '".$_GET["code"]."'";
+//     $statement = $connect->prepare($query);
+//     $statement->execute();
+//     // header('location:expenses.php');
+// }
 
 ?>
 <?php
@@ -138,87 +132,94 @@ if (isset($_GET["action"])) {
         </div>
 
 
-        <?php
-    } 
-   
+    <?php
+    }
+} else {
+    ?>
 
-        } else {
-                ?>
+    <div class="card mb-4 p-1">
+        <div class="card-header">
+            <div class="row">
+                <div class="col col-md-6">
+                    <i class="fas fa-table me-1"></i> Expense Information
+                </div>
+                <div class="col col-md-6" align="right">
+                    <?php if ($_SESSION['admin_id'] == 103) { ?>
+                        <a href="expenses.php?action=add" class="btn btn-success btn-sm">Add</a>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive p-1">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>S No.</th>
 
-                <div class="card mb-4 p-1">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col col-md-6">
-                                <i class="fas fa-table me-1"></i> Expense Information
-                            </div>
-                            <div class="col col-md-6" align="right">
-                                <a href="expenses.php?action=add" class="btn btn-success btn-sm">Add</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive p-1">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>S No.</th>
+                        <th>Expense Date</th>
+                        <th>Expense Type</th>
+                        <th>Money Spent</th>
+                        <?php if ($_SESSION['admin_id'] == 103) { ?>
+                            <th>Action</th>
+                        <?php } ?>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>S No.</th>
 
-                                    <th>Expense Date</th>
-                                    <th>Expense Type</th>
-                                    <th>Money Spent</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>S No.</th>
+                        <th>Expense Date</th>
+                        <th>Expense Type</th>
+                        <th>Money Spent</th>
+                        <?php if ($_SESSION['admin_id'] == 103) { ?>
+                            <th>Action</th>
+                        <?php } ?>
+                    </tr>
+                </tfoot>
+                <tbody>
 
-                                    <th>Expense Date</th>
-                                    <th>Expense Type</th>
-                                    <th>Money Spent</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
+                    <?php
+                    $result = $statement->fetchAll();
+                    $count = 1;
+                    foreach ($result as $row) {
 
-                                <?php
-                                $result = $statement->fetchAll();
-                                $count=1;
-                                foreach ($result as $row) {
-
-                                ?>
-                                    <tr>
-                                        <td><?php echo $count; ?></td>
-                                        <td><?php echo $row['e_date']; ?></td>
-                                        <td><?php echo $row['e_type']; ?></td>
-                                        <td><?php echo $row['money_spent']; ?></td>
-                                        <td>
-                                            <button type="button" name="delete" class="btn btn-danger btn-xs delete" onclick="delete_data(<?php echo $row['expenses_id'] ?>)">Delete</button>
-                                        </td>
-
-
-
-                                    </tr>
-
-
-
+                    ?>
+                        <tr>
+                            <td><?php echo $count; ?></td>
+                            <td><?php echo $row['e_date']; ?></td>
+                            <td><?php echo $row['e_type']; ?></td>
+                            <td><?php echo $row['money_spent']; ?></td>
+                            <?php if ($_SESSION['admin_id'] == 103) { ?>
+                                <td>
+                                    <button type="button" name="delete" class="btn btn-danger btn-xs delete" onclick="delete_data(<?php echo $row['expenses_id'] ?>)">Delete</button>
+                                </td>
+                            <?php } ?>
 
 
-                                <?php
-                                $count++;
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php
-            }
-                ?>
-                <script>
-                    function delete_data(code) {
-                        if (confirm("Are you sure you want to delete?")) {
-                            window.location.href = "expenses.php?action=delete&code=" + code;
-                        } else {
-                            return false;
-                        }
+
+
+                        </tr>
+
+
+
+
+
+                    <?php
+                        $count++;
                     }
-                </script>
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    <?php
+}
+    ?>
+    <script>
+        function delete_data(code) {
+            if (confirm("Are you sure you want to delete?")) {
+                window.location.href = "expenses.php?action=delete&code=" + code;
+            } else {
+                return false;
+            }
+        }
+    </script>
