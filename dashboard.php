@@ -164,7 +164,7 @@ include 'php_includes/header.php';
 </section>
 <section>
     <div class="row">
-      
+
         <div class="pricing-column col-lg-3 col-md-6 m-auto p-3">
             <div class="card bg-success" style="text-align:center; color:white;">
                 <div class="card-header">
@@ -317,37 +317,41 @@ $percent_cow = ($sum_cow / $sum) * 100;
 $percent_buff = ($sum_buff / $sum) * 100;
 $profit1 = $connect->query("select sum(sales.sale) as profit FROM sales GROUP by month(sales.s_date) ORDER BY month(sales.s_date) ASC;");
 $profit_result = $profit1->fetchAll();
-$profit2=$connect->query("select sum(expenses.money_spent) as profit FROM expenses GROUP by month(expenses.e_date) ORDER by month(expenses.e_date) asc;");
-$profit_result1=$profit2->fetchAll();
+$profit2 = $connect->query("select sum(expenses.money_spent) as profit FROM expenses GROUP by month(expenses.e_date) ORDER by month(expenses.e_date) asc;");
+$profit_result1 = $profit2->fetchAll();
 $profit_array1 = array();
 $profit_array2 = array();
-$month=$connect->query("SELECT DISTINCT month(sales.s_date) FROM sales ORDER BY month(sales.s_date) ASC;");
-$month_res=$month->fetchAll();
+$month = $connect->query("SELECT DISTINCT month(sales.s_date) FROM sales ORDER BY month(sales.s_date) ASC;");
+$month_res = $month->fetchAll();
 $profit_month = array();
 foreach ($profit_result as $row) {
     $profit_array1[] = $row['profit'];
-    
 }
 foreach ($profit_result1 as $row) {
     $profit_array2[] = $row['profit'];
-    
 }
-foreach($month_res as $row)
-{
-    $profit_month[]=$row['month(sales.s_date)'];
+foreach ($month_res as $row) {
+    $profit_month[] = $row['month(sales.s_date)'];
 }
 
 
 ?>
 
 <script>
-    const a1=<?php echo json_encode($profit_array1) ?>;
-    const a2=<?php echo json_encode($profit_array2) ?>;
+    const a1 = <?php echo json_encode($profit_array1) ?>;
+    const a2 = <?php echo json_encode($profit_array2) ?>;
     const values = [];
-    for(i=0;i<a1.length;i++)
-    {
-        values.push(a1[i]-a2[i]);
+    var i=0;
+    for (; i < Math.min(a1.length,a2.length); i++) {
+        values.push(a1[i] - a2[i]);
     }
+    // for(;i<a1.length;i++){
+    //     values.push(a1[i]);
+    // }
+    // for(;i<a2.length;i++){
+    //     values.push(-a2[i]);
+    // }
+
     //create month array with all months name
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const color = [];

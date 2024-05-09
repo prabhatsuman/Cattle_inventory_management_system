@@ -88,7 +88,7 @@ if (isset($_POST["login_button"])) {
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label>
 						<input type="text" name="admin_email" id="admin_email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
-						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+						<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 					</div>
 					<div class="form-group">
 
@@ -96,8 +96,8 @@ if (isset($_POST["login_button"])) {
 						<input type="password" name="admin_password" id="admin_password" class="form-control" placeholder="Password" />
 					</div>
 					<div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">Check me out</label>
+						<!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+						<!-- <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
 					</div>
 					<input type="submit" name="login_button" class="btn btn-primary" value="Login" />
 				</form>

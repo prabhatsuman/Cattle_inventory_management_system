@@ -279,7 +279,7 @@ if (isset($_GET["action"])) {
                                     <th>Milk Production Status</th>
                                     <?php if($_SESSION['admin_id']==101){?>
                                     <th>Action</th>
-                                    <?php }?>
+                                    <?php }?>               
                                 </tr>
                             </thead>
                             <tfoot>
