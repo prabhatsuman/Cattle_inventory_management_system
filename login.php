@@ -40,9 +40,8 @@ if (isset($_POST["login_button"])) {
 		if ($statement->rowCount() > 0) {
 			foreach ($statement->fetchAll() as $row) {
 				if ($row['admin_password'] == $formdata['admin_password']) {
-					session_start();
+					// session_start();
 					$_SESSION['admin_id'] = $row['admin_id'];
-
 					header('location:dashboard.php');
 				}
 				else

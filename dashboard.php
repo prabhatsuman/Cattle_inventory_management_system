@@ -1,7 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="http://localhost/DBMS_project/js/font-awesome-5-all.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
 <?php
 include 'php_includes/functions.php';
 include 'database_connection.php';
@@ -10,6 +6,9 @@ if (!is_admin_login()) {
 }
 include 'php_includes/header.php';
 ?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="http://localhost/DBMS_project/js/font-awesome-5-all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
 <section>
     <div class="row p-1">
@@ -17,7 +16,6 @@ include 'php_includes/header.php';
             <div class="card" style="text-align:center; background-color: rgb(89, 212, 109);color:white;">
                 <div class="card-header">
                     <?php
-
                     $query1 = $connect->query("SELECT COUNT(cattle_id) FROM cattle;");
                     $s1 = 0;
                     foreach ($query1 as $data2) {
@@ -29,8 +27,6 @@ include 'php_includes/header.php';
                             <h6 style="display:inline ;">Cattles</h6>
                         </span></h3>
                     <div class="card-body" <p>In Farm</p>
-
-
                     </div>
                 </div>
             </div>
@@ -341,8 +337,8 @@ foreach ($month_res as $row) {
     const a1 = <?php echo json_encode($profit_array1) ?>;
     const a2 = <?php echo json_encode($profit_array2) ?>;
     const values = [];
-    var i=0;
-    for (; i < Math.min(a1.length,a2.length); i++) {
+    var i = 0;
+    for (; i < Math.min(a1.length, a2.length); i++) {
         values.push(a1[i] - a2[i]);
     }
     // for(;i<a1.length;i++){

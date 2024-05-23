@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  php:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+      - phpmyadmin  # Adding phpMyAdmin as a dependency
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: Prabhat@12
+      MYSQL_DATABASE: cattle_inventory_system
+    ports:
+      - "8081:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8181:80"  # Change the port if necessary
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: Prabhat@12  # Set MySQL root password
+    depends_on:
+      - db
+    networks:
+      - default
+
+volumes:
+  db_data:
+
+networks:
+  default:

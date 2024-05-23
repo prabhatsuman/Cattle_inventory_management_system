@@ -23,18 +23,18 @@
     <title>Dashboard</title>
     <link rel="canonical" href="">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="http://localhost/DBMS_project/style.css">
-    <script src="http://localhost/DBMS_project/js/bootstrap.bundle.min.js"></script>
-    <script src="http://localhost/DBMS_project/js/scripts.js"></script>
-    <script src="http://localhost/DBMS_project/js/select2.min.js"></script>
-    <script src="http://localhost/DBMS_project/js/font-awesome-5-all.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:8080/style.css">
+    <script src="http://localhost:8080/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost:8080/js/scripts.js"></script>
+    <script src="http://localhost:8080/js/select2.min.js"></script>
+    <script src="http://localhost:8080/js/font-awesome-5-all.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="">
 
-    <link rel="stylesheet" href="http://localhost/DBMS_project/css/bootstrap.css">
-    <link rel="stylesheet" href="http://localhost/DBMS_project/css/simple-datatables-style.css">
-    <link rel="stylesheet" href="http://localhost/DBMS_project/css/styles.css">
-    <script src="http://localhost/DBMS_project/js/simple-datatables@latest.js"></script>
+    <link rel="stylesheet" href="http://localhost:8080/css/bootstrap.css">
+    <link rel="stylesheet" href="http://localhost:8080/css/simple-datatables-style.css">
+    <link rel="stylesheet" href="http://localhost:8080/css/styles.css">
+    <script src="http://localhost:8080/js/simple-datatables@latest.js"></script>
     
     <!-- Favicons -->
      <link rel="apple-touch-icon" href="" sizes="180x180">
@@ -65,7 +65,7 @@
 
         <nav class="sb-topnav navbar navbar-expand navbar-dark ">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="http://localhost/DBMS_project/dashboard.php">Cattle Mangement</a>
+            <a class="navbar-brand ps-3" href="http://localhost:8080/dashboard.php">Cattle Mangement</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 " id="sidebarToggle" href="#!" style="color:black"><i class="fas fa-bars"></i></button>
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -76,9 +76,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="http://localhost/DBMS_project/profile.php" style="color:black">Profile</a></li>
+                        <li><a class="dropdown-item" href="http://localhost:8080/profile.php" style="color:black">Profile</a></li>
                        
-                        <li><a class="dropdown-item" href="http://localhost/DBMS_project/logout.php" style="color:black">Logout</a></li>
+                        <li><a class="dropdown-item" href="http://localhost:8080/logout.php" style="color:black">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -95,12 +95,12 @@
                             <!-- <a class="nav-link" href="book.php"style="color:white;">Book</a> -->
                             <!-- <a class="nav-link" href="user.php"style="color:white;">User</a> -->
                             <!-- <a class="nav-link" href="issue_book.php"style="color:white;">Issue Book</a> -->
-                            <a class="nav-link" href="http://localhost/DBMS_project/admin/cattle_info.php"style="color:white;">Cattle Information</a>
-                            <a class="nav-link" href="http://localhost/DBMS_project/admin/dealers.php"style="color:white;">Dealer Information</a>
-                            <a class="nav-link" href="http://localhost/DBMS_project/admin/production.php"style="color:white;">Production Information</a>
-                            <a class="nav-link" href="http://localhost/DBMS_project/admin/sales.php"style="color:white;">Sales Information</a>
-                            <a class="nav-link" href="http://localhost/DBMS_project/admin/expenses.php"style="color:white;">Expenses</a>                            
-                            <a class="nav-link" href="http://localhost/DBMS_project/logout.php"style="color:white;">Logout</a>
+                            <a class="nav-link" href="http://localhost:8080/admin/cattle_info.php"style="color:white;">Cattle Information</a>
+                            <a class="nav-link" href="http://localhost:8080/admin/dealers.php"style="color:white;">Dealer Information</a>
+                            <a class="nav-link" href="http://localhost:8080/admin/production.php"style="color:white;">Production Information</a>
+                            <a class="nav-link" href="http://localhost:8080/admin/sales.php"style="color:white;">Sales Information</a>
+                            <a class="nav-link" href="http://localhost:8080/admin/expenses.php"style="color:white;">Expenses</a>                            
+                            <a class="nav-link" href="http://localhost:8080/logout.php"style="color:white;">Logout</a>
 
                         </div>
                     </div>
